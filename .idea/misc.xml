@@ -3,7 +3,14 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/jjuareza/Documents/myworkspace/MarvelHeroes/app/src/main/res/drawable-v24/background_black_gradient.xml" value="0.2585" />
+        <entry key="..\:/Users/jjuareza/Documents/myworkspace/MarvelHeroes/app/src/main/res/drawable/background_black_gradient.xml" value="0.2595" />
         <entry key="..\:/Users/jjuareza/Documents/myworkspace/MarvelHeroes/app/src/main/res/layout/activity_main.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/jjuareza/Documents/myworkspace/MarvelHeroes/app/src/main/res/layout/characters_pagination_layout.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/jjuareza/Documents/myworkspace/MarvelHeroes/app/src/main/res/layout/fragment_characters.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/jjuareza/Documents/myworkspace/MarvelHeroes/app/src/main/res/layout/fragment_heroes.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/jjuareza/Documents/myworkspace/MarvelHeroes/app/src/main/res/layout/item_character.xml" value="0.536" />
+        <entry key="..\:/Users/jjuareza/Documents/myworkspace/MarvelHeroes/app/src/main/res/layout/item_hero.xml" value="0.25416666666666665" />
       </map>
     </option>
   </component>
