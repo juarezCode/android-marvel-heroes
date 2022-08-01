@@ -3,6 +3,7 @@ package com.juarez.marvelheroes.api
 import com.juarez.marvelheroes.characters.domain.CharactersResponse
 import retrofit2.Response
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface MarvelApi {
@@ -11,6 +12,11 @@ interface MarvelApi {
     suspend fun getCharacters(
         @Query("limit") limit: Int = 20,
         @Query("offset") offset: Int = 20
+    ): Response<CharactersResponse>
+
+    @GET("public/characters/{characterId}")
+    suspend fun getCharacterDetail(
+        @Path("characterId") characterId: Int
     ): Response<CharactersResponse>
 
 }

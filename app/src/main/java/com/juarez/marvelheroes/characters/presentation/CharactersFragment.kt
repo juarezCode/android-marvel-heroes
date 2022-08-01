@@ -7,8 +7,10 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.juarez.marvelheroes.characters.domain.Character
 import com.juarez.marvelheroes.characters.presentation.adapter.CharactersAdapter
 import com.juarez.marvelheroes.characters.presentation.adapter.CharactersLoadStateAdapter
 import com.juarez.marvelheroes.databinding.FragmentCharactersBinding
@@ -22,7 +24,7 @@ class CharactersFragment :
     BaseFragment<FragmentCharactersBinding>(FragmentCharactersBinding::inflate) {
 
     private val viewModel: CharactersViewModel by viewModels()
-    private val charactersAdapter = CharactersAdapter()
+    private val charactersAdapter = CharactersAdapter { onItemClicked(it) }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -42,12 +44,20 @@ class CharactersFragment :
 
         charactersAdapter.addLoadStateListener {
             binding.shimmerContainer.isVisible = it.refresh is LoadState.Loading
-            
+
 //            if (it.refresh is LoadState.Error) {
 //                binding.containerHeroesError.isVisible = true
 //                val error = (it.refresh as LoadState.Error).error.localizedMessage
 //                binding.txtHeroesError.text = error
 //            }
         }
+    }
+
+    private fun onItemClicked(character: Character) {
+        val action =
+            CharactersFragmentDirections.actionCharactersFragmentToCharacterDetailFragment(
+                characterId = character.id
+            )
+        findNavController().navigate(action)
     }
 }

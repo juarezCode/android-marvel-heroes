@@ -9,15 +9,19 @@ import com.juarez.marvelheroes.characters.domain.Character
 import com.juarez.marvelheroes.databinding.ItemCharacterBinding
 import com.juarez.marvelheroes.utils.loadImage
 
-class CharactersAdapter : PagingDataAdapter<Character, CharactersAdapter.ViewHolder>(DiffCallback) {
+class CharactersAdapter(val onClickCharacter: (Character) -> Unit) :
+    PagingDataAdapter<Character, CharactersAdapter.ViewHolder>(DiffCallback) {
 
     class ViewHolder(val binding: ItemCharacterBinding) : RecyclerView.ViewHolder(binding.root)
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val character = getItem(position)
+        holder.itemView.setOnClickListener {
+            onClickCharacter(character!!)
+        }
         with(holder.binding) {
-            imgCharThumbnail.loadImage("${character?.thumbnail?.path}.${character?.thumbnail?.extension}")
-            txtCharName.text = character?.name ?: "unknown"
+            imgItemCharThumbnail.loadImage("${character?.thumbnail?.path}.${character?.thumbnail?.extension}")
+            txtItemCharName.text = character?.name ?: "unknown"
         }
     }
 
