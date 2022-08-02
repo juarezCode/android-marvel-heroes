@@ -6,11 +6,11 @@ data class CharactersResponse(
 )
 
 data class CharactersData(
+    val results: List<Character>,
+    val total: Int,
     val offset: Int,
     val limit: Int,
-    val total: Int,
     val count: Int,
-    val results: List<Character>
 )
 
 data class Character(

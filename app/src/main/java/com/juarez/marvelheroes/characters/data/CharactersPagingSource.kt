@@ -8,7 +8,7 @@ import com.juarez.marvelheroes.common.Constants
 import retrofit2.HttpException
 import java.io.IOException
 
-class CharactersPagingSource(private val marvelApi: MarvelApi) : PagingSource<Int, Character>() {
+class CharactersPagingSource(private val api: MarvelApi) : PagingSource<Int, Character>() {
     override fun getRefreshKey(state: PagingState<Int, Character>): Int? {
         return state.anchorPosition?.let { anchorPosition ->
             val anchorPage = state.closestPageToPosition(anchorPosition)
@@ -20,10 +20,9 @@ class CharactersPagingSource(private val marvelApi: MarvelApi) : PagingSource<In
         try {
             val nextPage = params.key ?: 1
             val offset = (nextPage - 1) * 20
-            val response = marvelApi.getCharacters(offset = offset)
+            val response = api.getCharacters(offset = offset)
             if (response.isSuccessful && response.body() != null) {
-                val characters = response.body()!!.data.results
-                val total = response.body()!!.data.total
+                val (characters, total) = response.body()!!.data
 
                 return LoadResult.Page(
                     data = characters,

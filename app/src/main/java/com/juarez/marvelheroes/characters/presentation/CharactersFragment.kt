@@ -29,11 +29,17 @@ class CharactersFragment :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.fabFavorites.isVisible = false
+
         binding.recyclerCharacters.apply {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = charactersAdapter.withLoadStateFooter(
                 footer = CharactersLoadStateAdapter(charactersAdapter::retry)
             )
+        }
+
+        binding.fabFavorites.setOnClickListener {
+            onFabFavoritesClick()
         }
 
         viewLifecycleOwner.lifecycleScope.launch {
@@ -44,6 +50,7 @@ class CharactersFragment :
 
         charactersAdapter.addLoadStateListener {
             binding.shimmerContainer.isVisible = it.refresh is LoadState.Loading
+            binding.fabFavorites.isVisible = it.refresh !is LoadState.Loading
 
 //            if (it.refresh is LoadState.Error) {
 //                binding.containerHeroesError.isVisible = true
@@ -51,6 +58,11 @@ class CharactersFragment :
 //                binding.txtHeroesError.text = error
 //            }
         }
+    }
+
+    private fun onFabFavoritesClick() {
+        val action = CharactersFragmentDirections.actionCharactersFragmentToFavoritesFragment()
+        findNavController().navigate(action)
     }
 
     private fun onItemClicked(character: Character) {
